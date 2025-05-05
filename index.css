@@ -1,0 +1,102 @@
+
+body {
+    display       : grid;
+    place-content : center;
+    min-height    : 100vh;
+    margin        : 0;
+    perspective   : 1000px;
+    background    : #222222;
+}
+
+img {
+    max-width : 100%;
+}
+
+.pikachu {
+    width               : 300px;
+    aspect-ratio        : 9 / 12;
+    background-size     : cover;
+    background-position : center;
+    position            : relative;
+    transition          : rotate 500ms ease;
+    transform-style     : preserve-3d;
+
+    &:hover {
+        rotate : x 20deg;
+    }
+
+    &::before {
+        content          : "";
+        position         : absolute;
+        inset            : 0;
+        z-index          : 100;
+        background-image : radial-gradient(circle, transparent 130px, black);
+        border-radius    : 1rem;
+        opacity          : 0;
+        transition       : opacity 500ms ease;
+    }
+
+    &:hover::before {
+        opacity : 1;
+    }
+
+    &::after {
+        content          : "";
+        position         : absolute;
+        inset            : 80% 1rem 1rem;
+        translate        : 0;
+        transform        : translateZ(-100px);
+        z-index          : 1;
+        background-color : #000000;
+        filter           : blur(1.5rem);
+        transition       : translate 500ms ease, rotate 500ms ease;
+    }
+
+    &:hover::after {
+        rotate    : x -20deg;
+        translate : 0 60px;
+    }
+
+    &:hover .logo {
+        transform : translateZ(25px) translateY(-2rem);
+        rotate    : x -20deg;
+    }
+
+    &:hover .front-image {
+        opacity   : 1;
+        transform : translateZ(20px) translateY(0rem);
+        rotate    : x -20deg;
+    }
+}
+
+.back-image {
+    position      : absolute;
+    z-index       : 10;
+    object-fit    : cover;
+    height        : 100%;
+    border-radius : 1rem;
+}
+
+.logo,
+.front-image {
+    position : absolute;
+}
+
+.logo {
+    z-index    : 1000;
+    width      : 75%;
+    inset      : auto 50% 1rem;
+    translate  : -50%;
+    transition : transform 500ms ease, rotate 500ms ease;
+
+}
+
+.front-image {
+    opacity          : 0;
+    z-index          : 100;
+    scale            : 1.05;
+    transform        : translateY(5rem);
+    left             : 1rem;
+    transform-origin : bottom;
+    transition       : transform 500ms ease, rotate 500ms ease, opacity 500ms ease;
+}
